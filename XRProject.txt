@@ -1,0 +1,23 @@
+1. BP_GameMode
+
+2. BP_ARPlayerController
+
+3. UI_CapsuleButton
+* Button이 Released 시 Call ReleaseEvent
+
+4. BP_StartMenu
+* CapsuleButton이 Released 시 Call StartSession
+* 함수로 각 State별 Visibility 처리
+
+5. BP_MainMenu
+* UI 초기화 - ARSession 호출 Bind
+* ScanningState면 SessionStarted가 true
+* ScanTimer가 2초 경과 시 ARGeometries가 1개 이상이면 SelectState로 변경 후 Scan이 끝났음을 Pawn에게 알림
+
+6. BP_ARPawn - AddComponents(Camera)
+* BP_MainMenu Widget 생성 후 Viewport에 Add
+* DepthTexture가 NotVaild면 GetARTexture하여 Set
+* Scan이 끝났으나 Plane이 선택되지 않았을 경우, PlaneTimer가 1초 경과 시 
+* 함수로 Screen의 CenterPosition을 Return
+* 함수로 PlaneCandidate를 생성하여 Return
+* 함수로 CenterPosition을 이용하여 PlaneExtents와 PlaneBoundartPolygon을 LineTrace 후 결과가 1개 이상 존재 시 PlaneCandidate를 받아와
