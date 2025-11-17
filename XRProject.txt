@@ -17,10 +17,22 @@
 6. BP_ARPawn - AddComponents(Camera)
 * BP_MainMenu Widget 생성 후 Viewport에 Add
 * DepthTexture가 NotVaild면 GetARTexture하여 Set
-* Scan이 끝났으나 Plane이 선택되지 않았을 경우, PlaneTimer가 1초 경과 시 
+* Scan이 끝났으나 Plane이 선택되지 않았을 경우, PlaneTimer 1초마다 PlaneCandidate 업데이트
 * 함수로 Screen의 CenterPosition을 Return
 * 함수로 PlaneCandidate를 생성하여 Return
 * 함수로 CenterPosition을 이용하여 PlaneExtents와 PlaneBoundartPolygon을 LineTrace 후 결과가 1개 이상 존재 시 PlaneCandidate를 받아오고, 이전 Candidate 지우고 새로 Set
 * 함수로 InputTouchState에서 Vector2D 추출하여 TouchedLocation Return
 * 함수로 TouchedLocation 이용하여 플레이어의 위치에서 터치 지점으로 가상의 선을 그어서 위치와 방향벡터 도출 후 LineTrace하여 OutHit과 ReturnValue Return
-* InputTouch에서 FingetIndex가 1일 때 Plane이 아직 선택되지 않았을 때 WorldLineTrace진행 후의 결과값이 
+* InputTouch에서 FingetIndex가 1일 때 Plane이 아직 선택되지 않았을 때, LineTrace에 결과가 존재하고 BP_Plane이면 SelectedPlane에 Set 후 선택됨을 알려 UI 변경
+* InputTouch에서 FingetIndex가 1일 때 Plane이 선택되었으나 Object가 배치되지 않았을 경우, LineTrace에 결과가 존재하고 SelectedPlane이면 Object Spawn 후 UI 변경
+* OneFingerAction과 TwoFingerAction을 터치씹힘을 고려하여 구현 / 틱마다 어떤 제스처인가 인식하여 Status 변경하여 적용
+
+7. BP_Plane
+* AR선택지점에 Object 스폰하기 위하여 선택지점 위에 생성되는 Map
+
+8. BP_ProductAssetRef
+* PlacedObject의 Asset 변경을 용이하게 하기 위한 ActorComponent
+
+9. BP_PlacedObject
+* 배치 될 물체
+* Transformation함수 보유하며 처리
